@@ -1,12 +1,12 @@
 # Project: Log Analysis
 
-First is a first project written as a part of then Full Stack Web Developer Nanodegree.
+First is a first project written as a part of the Udacity Full Stack Web Developer Nanodegree.
 
 # Pre-requisites
 
-Database: psql
+Database: PostgreSQL (psql)
 Language: python 2.7
-
+Database setup:
 1. data provided by the course (newsdata.sql)
 2. views below
 
