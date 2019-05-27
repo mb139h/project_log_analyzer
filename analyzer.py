@@ -12,7 +12,7 @@ query_top_popular_articles = "\
             from article_usage \
             order by usage desc \
             fetch first {0} rows only) u \
-    where LOWER(a.title) like CONCAT(u.starts_with,'%') \
+    where a.slug = u.starts_with \
     order by u.usage desc;"
 
 # Who are the most popular article authors of all time
@@ -20,8 +20,8 @@ query_author_popularity = "\
     select n.name, SUM(u.usage) as total \
     from authors n, \
         articles a, \
-        (select starts_with, usage from article_usage) u \
-    where n.id = a.author and LOWER(a.title) like CONCAT(u.starts_with,'%') \
+        article_usage u \
+    where n.id = a.author and a.slug = u.starts_with \
     group by n.name \
     order by total desc;"
 
