@@ -10,15 +10,19 @@ Database setup:
 1. data provided by the course (newsdata.sql)
 2. views below
 
-# view calculates the usage of each log item whose path contains something valuable
-# it will return the usage count and will covert the path to the more sutable for article search string 
+View1:
+Calculates the usage of each log item whose path contains something valuable.
+it will return the usage count and will covert the path to the more sutable for article search string
+
 create view article_usage as
 	select REPLACE(REPLACE(path,'-',' '),'/article/','') as starts_with, COUNT(*) usage
 	from log
 	where path != '/'
 	group by path;
 
-# view calculates total number of logged requests and number of errors per day
+View2: 
+Calculates total number of logged requests and number of errors per day
+
 create view daily_access as
 	select DATE(time) as logdate, SUM(CASE WHEN status != '200 OK' THEN 1 ELSE 0 END) as errcount, COUNT(*) as total
 	from daily_access
