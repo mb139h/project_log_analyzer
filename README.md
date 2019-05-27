@@ -47,21 +47,22 @@ While in the VM:
 ### View1:
 Calculates the usage of each log item whose path contains something valuable.
 it will return the usage count and will covert the path to the more sutable for article search string
-'''
+```sql
 create view article_usage as
 	select REPLACE(path,'/article/','') as starts_with, COUNT(*) usage
 	from log
 	where path != '/'
 	group by path;
-'''
+```
+
 ### View2: 
 Calculates total number of logged requests and number of errors per day
-'''
+```sql
 create view daily_access as
 	select DATE(time) as logdate, SUM(CASE WHEN status != '200 OK' THEN 1 ELSE 0 END) as errcount, COUNT(*) as total
 	from log
 	group by logdate;
-'''
+```
 
 # How to run code
 
@@ -74,8 +75,8 @@ The program will use the provided data set to calculate answers to the 3 questio
 2. Who are the most popular article authors of all time?
 3. On which days did more than 1% of requests lead to errors? 
 
-FOR EXAMPLE:
-'''
+### FOR EXAMPLE:
+```
 vagrant@vagrant:/vagrant/project1$ python analyzer.py
 
 Top popular articles:
@@ -91,4 +92,4 @@ Author popularity:
 
 Daily errors over 1 percent:
 July      17, 2016 -    2.3% errors
-'''
+```
