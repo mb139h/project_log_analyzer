@@ -46,7 +46,7 @@ While in the VM:
 
 ### View1:
 Calculates the usage of each log item whose path contains something valuable.
-it will return the usage count and will covert the path to the more sutable for article search string
+it will return the usage count and will convert the path to the more suitable for article search string
 ```sql
 create view article_usage as
 	select REPLACE(path,'/article/','') as starts_with, COUNT(*) usage
